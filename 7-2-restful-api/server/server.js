@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 
@@ -17,7 +18,11 @@ const PORT = process.env.PORT || 5174;
 app.use(cors());              
 app.use(express.json());
 
+console.log("Connecting to MongoDB..."+process.env.MONGO_URL    );
+
 await connectDB(process.env.MONGO_URL);
+
+console.log("Connected to MongoDB");
 
 
 // api/songs (Read all songs)
@@ -78,4 +83,4 @@ app.delete("/api/songs/:id", async (req, res) => {
   res.status(204).end();
 });
 
-app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}/api/songs`));
